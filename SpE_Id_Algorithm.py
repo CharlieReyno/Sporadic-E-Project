@@ -14,26 +14,26 @@
 # In[2]:
 
 
-''' INSTRUCTIONS :
+# INSTRUCTIONS :
 
-- Run all notebooks from top to bottom to execute the code. 
+# - Run all notebooks from top to bottom to execute the code. 
 
-- Things to check/change each time:
+# - Things to check/change each time:
 
-    Save_results function:
-        - filename_append: Identifier for to the criteria set used to identify Es layers. 
-                           '0.25sigma_2xMpza_1xpeak' is the string I used for the final criteria used for the paper
-        - output_file: Define where to save the output. 
+#     Save_results function:
+#         - filename_append: Identifier for to the criteria set used to identify Es layers. 
+#                            '0.25sigma_2xMpza_1xpeak' is the string I used for the final criteria used for the paper
+#         - output_file: Define where to save the output. 
 
-    Main Calculations:
-        - run_name: Defines what model run/input data is used. Permitted to be set values (Jianfei_run, Wuhu_IonTr_run, Wuhu_IonTr_run_6m, SMin, SMax) currently. More could be added in a similar way as needed
-        - ds_months_sets, Monthstr_sets, season_set : together define what seasons you're running the code for. Can be one or multiple. Common combos are left commented out for easy use
-        - Criteria calculations: If changing the criteria for some reason, they need to be changed where it says "CRITERIA & Es Identifiation Calculations". 
-                                 These calculations are repeated twice for calculations in local time and lon, so the criteria need to be changed in both places
+#     Main Calculations:
+#         - run_name: Defines what model run/input data is used. Permitted to be set values (Jianfei_run, Wuhu_IonTr_run, Wuhu_IonTr_run_6m, SMin, SMax) currently. More could be added in a similar way as needed
+#         - ds_months_sets, Monthstr_sets, season_set : together define what seasons you're running the code for. Can be one or multiple. Common combos are left commented out for easy use
+#         - Criteria calculations: If changing the criteria for some reason, they need to be changed where it says "CRITERIA & Es Identifiation Calculations". 
+#                                  These calculations are repeated twice for calculations in local time and lon, so the criteria need to be changed in both places
 
-Things to note:
-- If a nc file exists already with the same name it will throw an error when trying to save
-- Apologies for the rubbish variable names. If unsure what something is, check the attributes/dimensions in the nc variable or the code calculating the variable... Search for the variable and follow the code through
+# Things to note:
+# - If a nc file exists already with the same name it will throw an error when trying to save
+# - Apologies for the rubbish variable names. If unsure what something is, check the attributes/dimensions in the nc variable or the code calculating the variable... Search for the variable and follow the code through
 
 
 # In[3]:
@@ -55,12 +55,6 @@ import cftime
 import os
 import dask 
 from dask.distributed import Client, LocalCluster
-
-
-# In[ ]:
-
-
-
 
 
 # # Define_variables Function
@@ -552,7 +546,7 @@ def setup_parameters():
 
 # # Main calculations - for SpEs and crit freq
 
-# In[7]:
+# In[8]:
 
 
 start_time = time.process_time() 
@@ -565,7 +559,7 @@ start_time = time.process_time()
 crit_freq_on = 0   
 
 os.chdir('/resstore')
-run_name = 'Wuhu_IonTr_run'             
+run_name = 'SMax'             
 #Set to the relevant run name to change input files. Currently working for the runs below:
                                     #- Wuhu_IonTr_run - Wuhu's 3 metal run (Fe, Mg and Na). Equivalent to Jianfei_run but done at Leeds. Main dataset for analysis for SpE paper
                                     #- Jianfei_run - equivalent to Wuhu_IonTr_run from Wu et al 2021
@@ -608,13 +602,13 @@ run_name = 'Wuhu_IonTr_run'
 # Monthstr_sets = [ ['Mar', 'Apr', 'May'] ]
 # season_set = [ 'spring']
 
-# ds_months_sets = [['06','07','08']]
-# Monthstr_sets = [['Jun','Jul','Aug']]
-# season_set = ['summer']
+ds_months_sets = [['06','07','08']]
+Monthstr_sets = [['Jun','Jul','Aug']]
+season_set = ['summer']
 
-ds_months_sets = [['09','10','11']]
-Monthstr_sets = [['Sep', 'Oct', 'Nov']]
-season_set = ['autumn']
+# ds_months_sets = [['09','10','11']]
+# Monthstr_sets = [['Sep', 'Oct', 'Nov']]
+# season_set = ['autumn']
 
 # ds_months_sets = [['12','01','02']]
 # Monthstr_sets = [['Dec', 'Jan', 'Feb']]
